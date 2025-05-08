@@ -40,19 +40,35 @@ class CNN1D(nn.Module):
     def __init__(self, in_channels=1, num_features=10):
         super().__init__()
         self.conv = nn.Sequential(
-            nn.Conv1d(in_channels, 16, kernel_size=3, padding=1),
+            nn.Conv1d(in_channels, 32, kernel_size=3, padding=1),
+            nn.BatchNorm1d(32),
             nn.ReLU(),
             nn.MaxPool1d(2),
-            nn.Conv1d(16, 32, kernel_size=3, padding=1),
+            nn.Conv1d(32, 64, kernel_size=3, padding=1),
+            nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.AdaptiveMaxPool1d(1),
+            nn.MaxPool1d(2),
+            nn.Conv1d(64, 128, kernel_size=3, padding=1),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.MaxPool1d(2),
+            nn.Conv1d(128, 256, kernel_size=3, padding=1),
+            nn.BatchNorm1d(256),
+            nn.ReLU(),
+            nn.AdaptiveAvgPool1d(1),
         )
-        self.fc = nn.Sequential(nn.Flatten(), nn.Linear(32, 1))
+        self.fc = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(256, 128),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.Linear(128, 1),
+        )
 
     def forward(self, x):
-        x = self.conv(x)
-        x = self.fc(x)
-        return x.squeeze(1)
+        x = self.conv(x)  # shape: (batch, 256, 1)
+        x = self.fc(x)  # shape: (batch, 1)
+        return x.squeeze(1)  # shape: (batch,)
 
 
 def train_epoch(model, loader, criterion, optimizer, device):

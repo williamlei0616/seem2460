@@ -27,15 +27,16 @@ for train_index, val_index in kfold.split(train_df):
     validation = train_df.iloc[val_index]
 params = {
           'booster' : ['gbtree'],    
-          'n_estimators' : [ 800, 1000],
-          'objective' : ['reg:squarederror'],
-          'learning_rate': [0.4, 0.5],
-          'gamma' : [0.25, 0.5, ],
-          'alpha' : [0],     # L1 (Lasso Regression) Regularization Parameter (min = 0)
-          'lambda' : [1.25, 1.5], # L2 (Ridge Regression) Regularization Parameter
-          'max_depth': [3, 4],
-          'min_child_weight': [.6, 0.8],
-          'random_state' : [42]
+          'n_estimators' : [800, 1000],
+          'objective' : ['binary:logistic'],
+          'learning_rate': [0.1,0.3,0.5],
+          'gamma' : [0.1,0.2],
+          'alpha' : [0,0.5],     # L1 (Lasso Regression) Regularization Parameter (min = 0)
+          'lambda' : [1.25,1.5], # L2 (Ridge Regression) Regularization Parameter
+          'max_depth': [3,4],
+          'min_child_weight': [0.1,0.3],
+          'random_state' : [42],
+          'scale_pos_weight' : [1, 2,5,10], # Used for unbalanced classes
          }
 model = xgb.XGBClassifier()
 grid_search = GridSearchCV(estimator = model, 

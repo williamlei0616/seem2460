@@ -1,0 +1,24 @@
+[project]
+name = "seem2460"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Lei Wai Lun",email = "133950941+williamlei0616@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib (>=3.10.1,<4.0.0)",
+    "plotly (>=6.0.1,<7.0.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "seaborn (>=0.13.2,<0.14.0)",
+    "scipy (>=1.15.2,<2.0.0)",
+    "xgboost (>=3.0.0,<4.0.0)",
+    "scikit-learn (>=1.6.1,<2.0.0)",
+    "imblearn (>=0.0,<0.1)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,16 @@
+{
+    "base_score": 0.04862385321100918,
+    "booster": "gbtree",
+    "device": "cuda",
+    "gamma": 0.25,
+    "learning_rate": 0.2,
+    "max_depth": 4,
+    "min_child_weight": 1,
+    "n_estimators": 300,
+    "objective": "binary:logistic",
+    "random_state": 42,
+    "reg_alpha": 0,
+    "reg_lambda": 1.5,
+    "scale_pos_weight": 5,
+    "tree_method": "hist"
+}
